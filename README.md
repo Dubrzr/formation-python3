@@ -1,7 +1,20 @@
-* Théorie sur les versions, les packages et les environnements python
-  * python2, python3 (2008), python3.X "apt install python3" "python3 --version"
-  * pypi & pip (installation de pip "apt install python3-pip" ou https://pip.pypa.io/en/stable/installation/)
-  * venv (python3 -m venv /home/$USER/tmp/venv) "apt install python3-venv"
+# Intro
+
+## Histoire de python
+
+* python2, python3 (2008), python3.X
+
+Créé par Guido van Rossum (pays bas) en 1991, il devient "Benevolent Dictator for Life" sur le projet, employé de 2005-2012 par Google pour bosser sur Python (puis passe à dropbox de 2013 à 2019, puis depuis 2020 à M$)
+
+
+## Théorie sur les versions, les packages et les environnements python
+
+* apt install python3" "python3 --version"
+* pypi & pip (installation de pip "apt install python3-pip" ou https://pip.pypa.io/en/stable/installation/)
+
+### Environnements virtuels
+
+Si tu utilises le pip/poetry de ta machine pour installer des packages, alors ils seront disponibles pour tout le systèmes/tous les users, cependant si sur cette machine il y a plusieurs projets python, il vaut mieux créer un environnement virtuel par projet et y installer les packages de chaque projet :
 
 source /home/$USER/tmp/venv/bin/activate 
 pip install requests
@@ -9,11 +22,35 @@ pip install --proxy http://proxym-inter.aphp.fr:8080 requests
 
   * conda (venv+packages système)
 
-Histoire de python
+#### virtualenv venv
 
-Créé par Guido van Rossum (pays bas) en 1991, il devient "Benevolent Dictator for Life" sur le projet, employé de 2005-2012 par Google pour bosser sur Python (puis passe à dropbox de 2013 à 2019, puis depuis 2020 à M$)
+Création d'un virtualenv (ou venv pour les intimes) : python3 -m venv /home/$USER/mon/path/venv (possiblement besoin de apt install python3-venv -> c'est une lib standard de python pas installée par défaut)
 
-1. Setup de Pycharm - debug dans pycharm - tools ajoute rentrée bureau
+"Rentrer" dans un venv : source /home/$USER/mon/path/venv/bin/activate
+
+"Sortir" d'un venv : deactivate
+
+Une fois rentré dans un venv, tu peux y installer des packages (avec pip/poetry), on peut checker aussi quelles packages sont déjà présents avec pip freeze, d'ailleurs même si tu utilises poetry tu dois pouvoir lister les packages existants avec pip freeze
+
+Note: il y a d'autres packages pour créer des env. virtuels, virtualenv est très populaire par ex., cf https://stackoverflow.com/a/41573588/3157230) mais la lib standard venv est suffisante
+
+#### Conda
+
+Conda permet aussi de gérer des environnements virtuel avec conda create --name myenv
+
+Les différences entre venv et conda :
+
+* venv ne s'occupe de gérer que des packages python, si un package python a une dépendance sur un package système, alors il faut installer le package système sur le système avec sudo/root
+* conda comme venv permet de gérer des packages python, mais permet aussi de gérer des packages système dans l'environnement virtuel
+* conda a son propre repository officiel alimenté uniquement par conda, et met à dispo des repositories public (conda-forge) que les gens peuvent alimenter. Les packages conda sont différents car ils contiennent toutes leurs dépendances (python et système)
+* conda a un système de résolution de packages ultra complexe qui résout à la fois les dépendances python et les dépendances système -> d'où la réputation de conda pour sa lenteur extrème à la résolution des conflits de versions 
+* on ne choisira conda par exemple que pour des cas rares d'utilisateurs qui travaillent sur le même serveur ou qui n'ont pas le droit d'installer des packages système
+
+# Environnement de développement
+
+## Setup de Pycharm
+
+1. Setup de Pycharm - debug dans pycharm - l'onglet tools proposer d'ajouter une rentrée sur les bureau ubuntu
 2. main et PEP8
 
 if __name__ == "__main__":
@@ -21,7 +58,9 @@ if __name__ == "__main__":
 
 Attention à l'indentation, utiliser 2 ou 4 spaces pas de tab (rester cohérent à travers toute les développements), python a une coding style : https://peps.python.org/pep-0008/
 
-2. Fonctions python
+# Le langage 
+
+## Fonctions python
 
 def ma_fonction(arguments):
     truc_muche
@@ -32,7 +71,7 @@ nom_de_variable
 nom_de_fonction
 
 
-3. Modules python
+## Modules python
 
 Considérer l'archi suivante :
 
@@ -64,7 +103,7 @@ Attention au naming, toujours du snake case, utiliser le underscore vraiment que
 modulename
 module_name
 
-4. Syntaxe list, dict et arguments de fonction
+## Syntaxe list, dict et arguments de fonction
 
 a = [1,2,3,4,5]
 c = ['a','a',"a","a",a]
@@ -100,7 +139,7 @@ fun(1,2,3,*a)
 fun(**b)
 
 
-5. For, comprehension lists, cast
+## For, comprehension lists, cast
 
 a = [1,2,3,4,5]
 
@@ -139,7 +178,7 @@ result = {k + 'a': v + 10 for k, v in b.items()}
 
 
 
-6. print format (depuis python3.6), single quotes, double quote, triple quotes, et join
+## print format (depuis python3.6), single quotes, double quote, triple quotes, et join
 
 x = "une string"
 y = {"latitude": 45, "longitude": 2}
@@ -151,7 +190,7 @@ print("lat={0} lon={1}".format(y['latitude'], y['longitude']))
 print("lat={latitude} lon={longitude}".format(**y))
 
 
-7. Classes et asserts
+## Classes et asserts
 
 class MaClasseALaClasse:
     pass
@@ -188,7 +227,7 @@ assert obj.a == 5
 Attention au naming, toujours CamelCase pour les noms de classe
 
 
-8. type hints + fonctions imbriquées
+## type hints + fonctions imbriquées
 
 def greeting(name: str) -> str:
     return 'Hello ' + name
@@ -217,11 +256,11 @@ type(b)
 
 
 
-9. Lire des stacktraces
+## Lire des stacktraces
 
-11. Débug avec Pycharm
+## Débug avec Pycharm
 
-12. decorateurs
+## decorateurs
 
 
 . Bibliothèque Standard
