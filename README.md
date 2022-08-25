@@ -53,8 +53,10 @@ Les différences entre venv et conda :
 1. Setup de Pycharm - debug dans pycharm - l'onglet tools proposer d'ajouter une rentrée sur les bureau ubuntu
 2. main et PEP8
 
+```python3
 if __name__ == "__main__":
     print("Hello world!")
+```
 
 Attention à l'indentation, utiliser 2 ou 4 spaces pas de tab (rester cohérent à travers toute les développements), python a une coding style : https://peps.python.org/pep-0008/
 
@@ -62,8 +64,10 @@ Attention à l'indentation, utiliser 2 ou 4 spaces pas de tab (rester cohérent 
 
 ## Fonctions python
 
+```python3
 def ma_fonction(arguments):
     truc_muche
+```
 
 Attention au naming, pas de CamelCase pour les variables et fonctions : seulement du snake_case, exemple :
 
@@ -73,30 +77,7 @@ nom_de_fonction
 
 ## Modules python
 
-Considérer l'archi suivante :
-
-- main.py
-- a/__init__.py (vide)
-- a/utils.py
-- b/truc.py
-
-Avec main.py contient : 
-
-from a.utils import hello_world
-from b.truc import bidule
-
-print(hello_world('Coucou') + bidule())
-
-Avec a/utils.py contient :
-
-def hello_world(arg):
-    return arg + ": Hello world"
-
-Avec b/truc.py contient : 
-
-def bidule():
-    return 'Wesh'
-
+Considérer l'archi suivante : todo
 
 Attention au naming, toujours du snake case, utiliser le underscore vraiment que si ça améliore clairement la lisibilité, sinon faire sans.
 
@@ -105,6 +86,7 @@ module_name
 
 ## Syntaxe list, dict et arguments de fonction
 
+```python3
 a = [1,2,3,4,5]
 c = ['a','a',"a","a",a]
 
@@ -137,10 +119,11 @@ fun(1,2,3)
 fun(1,2,3,e=7,d=9)
 fun(1,2,3,*a)
 fun(**b)
-
+```
 
 ## For, comprehension lists, cast
 
+```python3
 a = [1,2,3,4,5]
 
 for element in a:
@@ -175,11 +158,11 @@ result = [str(v) for v in b.values()]
 result = [(k, str(v)) for k, v in b.items()]
 
 result = {k + 'a': v + 10 for k, v in b.items()}
-
-
+```
 
 ## print format (depuis python3.6), single quotes, double quote, triple quotes, et join
 
+```python3
 x = "une string"
 y = {"latitude": 45, "longitude": 2}
 z = ['ah', 'oui', "j'aime"]
@@ -188,10 +171,11 @@ print("x vaut {x}")
 print(f"x vaut {x}")
 print("lat={0} lon={1}".format(y['latitude'], y['longitude']))
 print("lat={latitude} lon={longitude}".format(**y))
-
+```
 
 ## Classes et asserts
 
+```python3
 class MaClasseALaClasse:
     pass
 
@@ -222,13 +206,14 @@ obj = MaClasseALaClasse(1,2,3, a=5, b=6, c=7)
 obj.describe_yourself()
 
 assert obj.a == 5
-
+```
 
 Attention au naming, toujours CamelCase pour les noms de classe
 
 
 ## type hints + fonctions imbriquées
 
+```python3
 def greeting(name: str) -> str:
     return 'Hello ' + name
 
@@ -249,11 +234,9 @@ def greetings() -> Callable:
 
 greetings()("flouze", "thunes", "money", h=45, b=87, zzza=987654)
 
-
-
 type(b)
 <class 'dict'>
-
+```
 
 
 ## Lire des stacktraces
